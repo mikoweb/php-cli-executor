@@ -78,6 +78,11 @@ Failed too `sample-cli.php`:
 exit(1);
 ```
 
+## Tests
+
+    php7.1 composer.phar install --dev
+    php7.1 ./vendor/bin/phpunit tests
+
 ## Copyrights
 
 Copyright (c) Rafał Mikołajun 2022.
