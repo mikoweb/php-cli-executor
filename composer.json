@@ -1,0 +1,20 @@
+{
+    "name": "mikoweb/php-cli-executor",
+    "type": "library",
+    "description": "PHP CLI Executor",
+    "keywords": ["php", "cli", "exec", "cli client", "execute", "executor", "command"],
+    "homepage": "https://rmweb.pl",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Rafał Mikołajun",
+            "email": "root@rmweb.pl",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mikoweb\\CLIExecutor\\": "src/"
+        }
+    }
+}
