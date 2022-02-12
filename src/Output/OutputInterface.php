@@ -7,6 +7,14 @@
 
 namespace Mikoweb\CLIExecutor\Output;
 
+use Symfony\Component\Process\Process;
+
 interface OutputInterface
 {
+    public function getRawOutput(): string;
+    public function getData(): OutputDataInterface;
+    public function getProcess(): Process;
+    public function getErrorMessage(): ?string;
+    public function getStatus(): ?int;
+    public function isSuccessful(): bool;
 }
