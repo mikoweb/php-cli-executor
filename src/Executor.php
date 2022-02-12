@@ -7,9 +7,12 @@
 
 namespace Mikoweb\CLIExecutor;
 
+use Mikoweb\CLIExecutor\Output\Output;
 use Mikoweb\CLIExecutor\Output\OutputInterface;
 use Mikoweb\CLIExecutor\Output\OutputParser;
 use Mikoweb\CLIExecutor\Output\OutputParserInterface;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class Executor
 {
@@ -43,7 +46,20 @@ class Executor
         ?float $timeout = 60
     ): OutputInterface
     {
-        // TODO
+        $process = new Process($this->pathResolver->resolve($command), $cwd, $env, $input, $timeout);
+
+        try {
+            $process->mustRun();
+        } catch (ProcessFailedException $exception) {
+            $data = json_encode([
+                'status' => $exception->getProcess()->getExitCode(),
+                'error_message' => $exception->getMessage(),
+            ]);
+
+            return new Output($this->outputParser, $process, "<output>$data</output>");
+        }
+
+        return new Output($this->outputParser, $process);
     }
 
     public function executeAsync(
@@ -54,6 +70,9 @@ class Executor
         ?float $timeout = 60
     ): OutputInterface
     {
-        // TODO
+        $process = new Process($this->pathResolver->resolve($command), $cwd, $env, $input, $timeout);
+        $process->start();
+
+        return new Output($this->outputParser, $process);
     }
 }

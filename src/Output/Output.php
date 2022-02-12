@@ -32,11 +32,15 @@ class Output implements OutputInterface
      */
     protected $data;
 
-    public function __construct(OutputParserInterface $outputParser, Process $process)
+    public function __construct(
+        OutputParserInterface $outputParser,
+        Process $process,
+        ?string $forceRawOutput = null
+    )
     {
         $this->outputParser = $outputParser;
         $this->process = $process;
-        $this->rawOutput = null;
+        $this->rawOutput = $forceRawOutput;
         $this->data = null;
     }
 
