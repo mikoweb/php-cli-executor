@@ -22,6 +22,7 @@ final class ExecutorTest extends TestCase
         $this->assertIsString($output->getRawOutput());
         $this->assertIsArray($output->getData()->getData());
         $this->assertNotEmpty($output->getData()->getData());
+        $this->assertTrue($output->getData()->has('message'));
         $this->assertEquals('ok', $output->getData()->get('message'));
     }
 
@@ -39,6 +40,7 @@ final class ExecutorTest extends TestCase
         $this->assertIsString($output->getRawOutput());
         $this->assertIsArray($output->getData()->getData());
         $this->assertNotEmpty($output->getData()->getData());
+        $this->assertTrue($output->getData()->has('message'));
         $this->assertEquals('ok', $output->getData()->get('message'));
     }
 
@@ -55,6 +57,8 @@ final class ExecutorTest extends TestCase
         $this->assertIsString($output->getRawOutput());
         $this->assertIsArray($output->getData()->getData());
         $this->assertNotEmpty($output->getData()->getData());
+        $this->assertFalse($output->getData()->has('message'));
+        $this->assertNull($output->getData()->get('message'));
     }
 
     public function testFailCase2(): void
@@ -70,5 +74,7 @@ final class ExecutorTest extends TestCase
         $this->assertIsString($output->getRawOutput());
         $this->assertIsArray($output->getData()->getData());
         $this->assertNotEmpty($output->getData()->getData());
+        $this->assertFalse($output->getData()->has('message'));
+        $this->assertNull($output->getData()->get('message'));
     }
 }
