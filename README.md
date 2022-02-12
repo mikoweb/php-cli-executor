@@ -80,4 +80,4 @@ exit(1);
 
 ## Copyrights
 
-Copyright (c) Rafał Mikołajun 2021.
+Copyright (c) Rafał Mikołajun 2022.
