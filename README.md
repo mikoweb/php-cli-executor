@@ -2,6 +2,10 @@
 
 Library for CLI application execution with output parsing and validation.
 
+## Installation
+
+    composer require mikoweb/php-cli-executor
+
 ## Example of use
 
 In your app file:
