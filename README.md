@@ -31,8 +31,8 @@ try {
     echo $output->getData()->get('message')); // you can get result property
     // echo $output->getData()->getData(); // or you can get full data
 } catch (InvalidOutputException $exception) {
-    dump($output->getErrorMessage());
-    dump($output->getStatus());
+    echo $output->getErrorMessage());
+    echo $output->getStatus());
     
     // you can access to $exception->getValidationResult(), $exception->getMessage(), $exception->getCode() etc. 
 }
