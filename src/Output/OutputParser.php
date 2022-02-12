@@ -11,10 +11,16 @@ final class OutputParser implements OutputParserInterface
 {
     public function parse(string $output): array
     {
-        preg_match("/<output>(.*?)<\/output>/", $output, $matches);
+        preg_match("/<output>(.*)<\/output>/ms", $output, $matches);
 
         if (count($matches) === 2) {
-            return json_decode($matches[1], true) ?? [];
+            $data = trim($matches[1]);
+
+            if (($pos = strpos($data, '</output>')) !== false) {
+                $data = substr($data, 0, $pos);
+            }
+
+            return json_decode($data, true) ?? [];
         }
 
         return [];
