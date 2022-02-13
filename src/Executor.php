@@ -9,7 +9,7 @@ namespace Mikoweb\CLIExecutor;
 
 use Mikoweb\CLIExecutor\Output\Output;
 use Mikoweb\CLIExecutor\Output\OutputInterface;
-use Mikoweb\CLIExecutor\Output\OutputParser;
+use Mikoweb\CLIExecutor\Output\JsonOutputParser;
 use Mikoweb\CLIExecutor\Output\OutputParserInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -35,7 +35,7 @@ class Executor
     {
         $this->config = $config;
         $this->pathResolver = new PathResolver($config);
-        $this->outputParser = $outputParser ?? new OutputParser();
+        $this->outputParser = $outputParser ?? new JsonOutputParser();
     }
 
     public function execute(

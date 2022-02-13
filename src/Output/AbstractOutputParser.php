@@ -7,7 +7,7 @@
 
 namespace Mikoweb\CLIExecutor\Output;
 
-final class OutputParser implements OutputParserInterface
+abstract class AbstractOutputParser implements OutputParserInterface
 {
     public function parse(string $output): array
     {
@@ -20,9 +20,11 @@ final class OutputParser implements OutputParserInterface
                 $data = substr($data, 0, $pos);
             }
 
-            return json_decode($data, true) ?? [];
+            return $this->decode($data);
         }
 
         return [];
     }
+
+    abstract public function decode(string $data): array;
 }
