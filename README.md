@@ -82,6 +82,26 @@ Failed too `sample-cli.php`:
 exit(1);
 ```
 
+## Custom Output Parser
+
+By default, it is used JsonOutputParser. You can create your own parser e.g. XmlOutputParser:
+
+```php
+class XmlOutputParser extends AbstractOutputParser
+{
+    public function decode(string $data): array
+    {
+        return simplexml_to_assoc(simplexml_load_string($data));
+    }
+}
+```
+
+Set the parser as an Executor argument:
+
+```php
+$executor = new Executor($config, new XmlOutputParser());
+```
+
 ## Tests
 
     php7.1 composer.phar install --dev
