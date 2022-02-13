@@ -17,7 +17,7 @@ class Validator implements ValidatorInterface
         $result = new ValidationResult($output->isSuccessful(), $output->getErrorMessage(), $output->getStatus());
 
         if ($throwable && !$result->isValid()) {
-            throw new InvalidOutputException($output->getErrorMessage(), $result, (int) $output->getStatus());
+            throw new InvalidOutputException((string) $output->getErrorMessage(), $result, (int) $output->getStatus());
         }
 
         return $result;
