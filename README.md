@@ -133,7 +133,7 @@ $executor = new Executor($config, new XmlOutputParser());
 
 ## Custom Writer Serializer
 
-By default, it is used JsonSerializer. You can create your own parser e.g. XmlSerializer:
+By default, it is used JsonSerializer. You can create your own serializer e.g. XmlSerializer:
 
 ```php
 class XmlSerializer implements SerializerInterface
