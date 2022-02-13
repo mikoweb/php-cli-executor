@@ -44,6 +44,23 @@ final class ExecutorTest extends TestCase
         $this->assertEquals('ok', $output->getData()->get('message'));
     }
 
+    public function testSuccessfulWithWriterCase2(): void
+    {
+        $config = new Config(__DIR__ . '/scripts/successful-cli-case2.php');
+        $executor = new Executor($config);
+
+        $output = $executor->execute(['app:test']);
+
+        $this->assertTrue($output->isSuccessful());
+        $this->assertNull($output->getErrorMessage());
+        $this->assertEquals(200, $output->getStatus());
+        $this->assertIsString($output->getRawOutput());
+        $this->assertIsArray($output->getData()->getData());
+        $this->assertNotEmpty($output->getData()->getData());
+        $this->assertTrue($output->getData()->has('message'));
+        $this->assertEquals('ok', $output->getData()->get('message'));
+    }
+
     public function testFailCase1(): void
     {
         $config = new Config(__DIR__ . '/scripts/fail-cli-case1.php');
