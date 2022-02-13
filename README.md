@@ -42,7 +42,36 @@ try {
 }
 ```
 
-Successful `sample-cli.php`:
+Successful with WriterBuilder `sample-cli.php`:
+
+```php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Mikoweb\CLIExecutor\Writer\WriterBuilder;
+
+$writer = new WriterBuilder();
+$writer
+    ->setMessage('ok')
+    ->printMessageAsSuccess(true)
+    ->write()
+;
+
+exit(0);
+```
+
+Failed example with WriterBuilder `sample-cli.php`:
+
+```php
+$writer = new WriterBuilder();
+$writer
+    ->setErrorMessage("something's wrong")
+    ->printErrorMessageAsError(true)
+    ->setStatus(OutputStatus::STATUS_INTERNAL_ERROR)
+    ->write()
+;
+```
+
+Successful Raw Example `sample-cli.php`:
 
 ```php
 echo '
@@ -61,13 +90,13 @@ Lorem ipsum // unnecessary, example
 exit(0);
 ```
 
-Failed `sample-cli.php`:
+Failed Raw Example `sample-cli.php`:
 
 ```php
 echo '
 <output>
 {
-    "error_message": "something\'s wrong ",
+    "error_message": "something\'s wrong",
     "status": 500
 }
 </output>
@@ -100,6 +129,26 @@ Set the parser as an Executor argument:
 
 ```php
 $executor = new Executor($config, new XmlOutputParser());
+```
+
+## Custom Writer Serializer
+
+By default, it is used JsonSerializer. You can create your own parser e.g. XmlSerializer:
+
+```php
+class XmlSerializer implements SerializerInterface
+{
+    public function serialize(array $data): string
+    {
+        return JMS::serialize($data, 'xml');
+    }
+}
+```
+
+Set the serializer as an WriterBuilder argument:
+
+```php
+$writer = new WriterBuilder(new XmlSerializer());
 ```
 
 ## Tests
